@@ -4,11 +4,17 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <div class="row">
+                        <div class="row mb-2">
                             <div class="col-6 d-flex align-items-center">
                                 <h6 class="mb-0">Contratos</h6>
                             </div>
-                            <div class="col-6 text-end">
+                            <div class="col-3 text-end">
+                                <button class="btn btn-primary" color="dark" variant="gradient" @click="importar()">
+                                    <i class="fas fa-plus me-2"></i>
+                                    Importar Contratos
+                                </button>
+                            </div>
+                            <div class="col-3 text-end">
                                 <button class="btn btn-primary" color="dark" variant="gradient" @click="add()">
                                     <i class="fas fa-plus me-2"></i>
                                     Agregar
@@ -160,6 +166,10 @@ export default {
             router.push(`/contratos/${id}/detalle/crear`)
         }
 
+        const importar = () => {
+            router.push('/contratos/importar')
+        }
+
         onMounted(() => {
             getAgreements();
         })
@@ -173,7 +183,8 @@ export default {
             detail,
             execution,
             edit,
-            createDetail
+            createDetail,
+            importar
         }
     }
 }

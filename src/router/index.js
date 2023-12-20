@@ -8,7 +8,6 @@ import EditarPartida from '../views/Catalogos/Partidas/Edit.vue';
 import Concepto from '../views/Catalogos/Conceptos/Index.vue';
 import CrearConcepto from '../views/Catalogos/Conceptos/Create.vue';
 import Capitulo from '../views/Catalogos/Capitulos/Index.vue';
-import CapituloImportar from '../views/Catalogos/Capitulos/Import.vue';
 import UnidadesMedida from '../views/Catalogos/UnidadesMedida/Index.vue';
 import UnidadesMedidaCrear from '../views/Catalogos/UnidadesMedida/Create.vue';
 // Sección de contratos
@@ -23,6 +22,7 @@ import VersionesContratoEditar from '../views/Contratos/Versiones/Edit.vue';
 import DetalleEjecucionContrato from '../views/Contratos/Ejecucion/Execution.vue';
 import EjecucionContratoCrear from '../views/Contratos/Ejecucion/CreateExecution.vue';
 import EjecucionContratoEditar from '../views/Contratos/Ejecucion/Update.vue';
+import ContratoImportar from '../views/Contratos/Import.vue';
 // Usuarios
 import Usuarios from '../views/Usuarios/Index.vue';
 import UsuariosCrear from '../views/Usuarios/Create.vue';
@@ -100,6 +100,11 @@ const routes = [
     name: "DetalleContratoCrear",
     component: DetalleContratoCrear
   },
+  {
+    path: "/contratos/importar",
+    name: "ContratosImportar",
+    component: ContratoImportar,
+  },
   // catalogos 
   {
     path: "/catalogos/partidas",
@@ -130,11 +135,6 @@ const routes = [
     path: "/catalogos/capitulos",
     name: "Capitulos",
     component: Capitulo,
-  },
-  {
-    path: "/catalogos/capitulos/importar",
-    name: "CapitulosImportar",
-    component: CapituloImportar,
   },
   {
     path: "/catalogos/unidades-medida",

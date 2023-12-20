@@ -8,11 +8,6 @@
                             <div class="col-6 d-flex align-items-center">
                                 <h6 class="mb-0">Capítulos</h6>
                             </div>
-                            <div class="col-6 d-flex text-end" @click="prueba">
-                                <button class="btn btn-success">
-                                    Capitulo 1000
-                                </button>
-                            </div>
                         </div>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
@@ -119,10 +114,6 @@ export default {
                 console.error(error);
             }
         }
-        
-        const prueba = () => {
-            router.push('/catalogos/capitulos/importar')
-        }
 
         const addChapter = () => {
             router.push('/catalogos/capitulos/crear')
@@ -136,8 +127,7 @@ export default {
             chapters,
             columns,
             buttons,
-            addChapter,
-            prueba
+            addChapter
         }
     }
 }

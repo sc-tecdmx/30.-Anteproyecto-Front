@@ -11,17 +11,13 @@
                      <div class="card-body">
                         <form @submit.prevent="store">
                             <div class="row">
+                                <div class="col-md-12 text-start">
+                                    <p>En caso de que necesites subir contratos multiples, descarga el template desde este enlace: <a :href="templateFile" download>template</a></p>
+                                </div>
                                 <div class="col-md-6">
                                     <label for="example-text-input" class="form-control-label"
                                     >Archivo</label>
-                                    <input
-                                        type="file"
-                                        class="form-control"
-                                        name="archivo"
-                                        id="archivo"
-                                        placeholder="Archivo"
-                                        required
-                                    />
+                                    <input type="file" class="form-control" @change="uploadFile" />
                                 </div>
                             </div>
                             <div class="row mt-3">
@@ -55,41 +51,48 @@ export default {
     components: { },
     setup() {
         const file = ref();
+        const templateFile = ref('/public/files/templateImport.xlsx');
 
         const route = useRouter();
 
         const store = async () => {
-            // const data = new FormData()
-            // data.append(file) = file;
-            await axios.post(`${process.env.VUE_APP_API_URL}/contratos/importar`, file)
+            let data = new FormData();
+            data.append('file', file.value);
+            await axios.post(`${process.env.VUE_APP_API_URL}/contratos/importar`, data)
                 .then(() => {
                     Swal.fire(
                         '¡Éxito!',
-                        'El concepto ha sido guardado correctamente',
+                        'Los contratos se han importado correctamente',
                         'success'
                     );
-                    route.push('/catalogos/capitulos');
+                    route.push('/contratos');
                 })
                 .catch((err) => {
                     console.error(err);
                     Swal.fire(
                         'Error!',
-                        'Hubo un error al guardar la información',
+                        'Hubo un error al importar la información',
                         'error'
                     );
                 })
         }
 
         const cancel = () => {
-            route.push('/catalogos/capitulos');
+            route.push('/contratos');
+        }
+
+        const uploadFile = (event) => {
+            file.value = event.target.files[0];
         }
 
         onMounted(() => {});
 
         return {
             file,
+            templateFile,
             store,
-            cancel
+            cancel,
+            uploadFile
         }
     }
 }

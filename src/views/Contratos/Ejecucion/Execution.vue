@@ -53,9 +53,6 @@
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center"
                                         >Costo</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center"
-                                        ></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,16 +61,18 @@
                                             <p class="text-xs font-weight-bold mb-0 text-center">{{ month.mes.descripcion }}</p>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0 text-center">${{ new Intl.NumberFormat('es-mx').format(month.costo) }}</p>
+                                            <input type="text" class="form-control" v-model="months[index].costo">
                                         </td>                                    
-                                        <td>
-                                            <button class="p-0 btn btn-link text-dark fixed-plugin-close-button" @click="updateExecution(month.id)">
-                                                <font-awesome-icon icon="fa-solid fa-pen-to-square" />
-                                            </button>
-                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12 text-end">
+                                <button class="btn btn-success" @click="updateExecution()">
+                                    Guardar
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -93,6 +92,7 @@ import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import DetailAgreement from '@/components/DetailAgreement.vue';
+import Swal from 'sweetalert2';
 
 export default {
     name: 'Index',
@@ -143,8 +143,26 @@ export default {
             }
         }
 
-        const updateExecution = async (execution) => {
-            router.push(`/contratos/ejecucion/${execution}/editar`)
+        const updateExecution = async () => {
+            // router.push(`/contratos/ejecucion/${execution}/editar`)
+            console.log(months.value)
+            await axios.put(`${process.env.VUE_APP_API_URL}/contratos/${route.params.id}/ejecucion`, months.value)
+                .then(() => {
+                    Swal.fire(
+                        '¡Éxito!',
+                        'La ejecución del contrato ha sido guardada correctamente',
+                        'success'
+                    );
+                    router.push(`/contratos/${route.params.id}/ejecucion`);
+                })
+                .catch((err) => {
+                    console.error(err);
+                    Swal.fire(
+                        'Error!',
+                        'Hubo un error al guardar la información',
+                        'error'
+                    );
+                })
         }
 
         const add = () => {
