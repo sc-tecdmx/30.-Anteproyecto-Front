@@ -12,7 +12,7 @@
                         <form @submit.prevent="store">
                             <div class="row">
                                 <div class="col-md-12 text-start">
-                                    <p>En caso de que necesites subir contratos multiples, descarga el template desde este enlace: <a :href="templateFile" download>template</a></p>
+                                    <p>En caso de que necesites subir contratos multiples, descarga el template desde este enlace: <button type="btn btn-text" @click.prevent="downloadTemplate()">template</button></p>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="example-text-input" class="form-control-label"
@@ -51,7 +51,7 @@ export default {
     components: { },
     setup() {
         const file = ref();
-        const templateFile = ref('/public/files/templateImport.xlsx');
+        const templateFile = ref('/templateImport.xlsx');
 
         const route = useRouter();
 
@@ -85,6 +85,48 @@ export default {
             file.value = event.target.files[0];
         }
 
+        /**
+         *
+         * @param headers
+         * @param defaultName
+         * @returns {string}
+         */
+        const getFileNameFromHeader = (headers, defaultName) => {
+            let filename = defaultName
+            const contentDisposition = headers['content-disposition'] || ''
+            if (contentDisposition && contentDisposition.indexOf('attachment') !== -1) {
+                const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/
+                const matches = filenameRegex.exec(contentDisposition)
+                if (matches != null && matches[1]) {
+                filename = matches[1].replace(/['"]/g, '')
+                }
+            }
+
+            return filename
+        }
+
+        const downloadTemplate = async () => {
+            try {
+                const response = await axios.get(`${process.env.VUE_APP_API_URL}/contratos/plantilla`, {
+                    responseType: 'blob'
+                })
+
+                const url = window.URL.createObjectURL(new Blob([response.data]))
+                const link = document.createElement('a')
+                link.href = url
+                link.setAttribute('download', getFileNameFromHeader(response.headers, 'plantilla.xlsx'))
+                document.body.appendChild(link)
+                link.click()
+            } catch (e) {
+                console.log(e);
+                Swal.fire(
+                    'Error!',
+                    'Hubo un error al descargar el archivo, por favor intentalo mas tarde.',
+                    'error'
+                )
+            }
+        }
+
         onMounted(() => {});
 
         return {
@@ -92,7 +134,8 @@ export default {
             templateFile,
             store,
             cancel,
-            uploadFile
+            uploadFile,
+            downloadTemplate
         }
     }
 }
