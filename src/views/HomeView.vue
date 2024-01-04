@@ -1,51 +1,56 @@
 <template>
   <div class="home">
-    <section class="vh-100 gradient-custom">
+    <section class="vh-100">
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-            <div class="card bg-dark text-white" style="border-radius: 1rem;">
-              <div class="card-body p-5 text-center">
-                <div class="mb-md-5 mt-md-4 pb-5">
-                  <h2 class="fw-bold mb-2 text-uppercase">anteproyecto</h2>
+            <div class="card" style="border-radius: 1rem;">
+              <div class="card-body p-5">
+                <div class="mt-md-4">
+                  <h2 class="fw-bold mb-2 text-center">Iniciar sesión</h2>
+                  <p class="text-center">Ingresar usuario y contraseña para continuar</p>
                   <form @submit.prevent="login">
                     <div class="form-outline form-white mb-4">
+                      <label class="form-label" for="typeEmailX">Usuario</label>
                       <input
                         type="text"
                         class="form-control form-control-lg"
                         v-model="credentials.username"
                         label="Email"
                       />
-                      <label class="form-label" for="typeEmailX">Usuario</label>
                     </div>
                     <div class="form-outline form-white mb-4">
+                      <label class="form-label" for="typePasswordX">Contraseña</label>
                       <input
                         type="password"
                         class="form-control form-control-lg"
                         v-model="credentials.password"
                       />
-                      <label class="form-label" for="typePasswordX">Password</label>
                     </div>
                     <div class="form-outline form-white mb-4">
+                      <label class="form-label" for="exercise">Ejercicio</label>
                       <select v-model="credentials.exercise" class="form-select" id="exercise" @change="getScenarios()">
                           <option :value="null" disabled>Selecciona una opción</option>
                           <option v-for="exercise in exercises" :key="exercise.id" :value="exercise.id">
                               {{ exercise.ejercicio }}
                           </option>
                       </select>
-                      <label class="form-label" for="exercise">Ejercicio</label>
                     </div>
                     <div class="form-outline form-white mb-4">
+                      <label class="form-label" for="exercise">Escenario</label>
                       <select v-model="credentials.scenario" class="form-select" id="scenario">
                           <option :value="null" disabled>Selecciona una opción</option>
                           <option v-for="scenario in scenarios" :key="scenario.id" :value="scenario.id">
                               {{ scenario.escenario }}
                           </option>
                       </select>
-                      <label class="form-label" for="exercise">Escenario</label>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 text-center">
+                        <button class="btn btn-azul btn-lg" type="submit">Login</button>
+                      </div>
                     </div>
                     <!--<p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">¿Olvidaste tu contraseña?</a></p>-->
-                    <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
                   </form>
                 </div>
               </div>
@@ -134,5 +139,9 @@ export default {
 
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+}
+.btn-azul {
+  background: #194891;
+  color: white;
 }
 </style>

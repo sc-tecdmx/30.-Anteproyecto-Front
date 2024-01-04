@@ -1,5 +1,5 @@
 <template>
-    <div class="footer-wrapper justify-content-center">
+    <div class="footer-wrapper justify-content-center text-center">
         <div class="footer-section f-section-1">
             <p>
                 Magdalena #21, Del Valle Centro, Benito Juárez, C.P. 03100, Ciudad de
