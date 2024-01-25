@@ -40,7 +40,7 @@
                       <label class="form-label" for="exercise">Escenario</label>
                       <select v-model="credentials.scenario" class="form-select" id="scenario">
                           <option :value="null" disabled>Selecciona una opción</option>
-                          <option v-for="scenario in scenarios" :key="scenario.id" :value="scenario.id">
+                          <option v-for="scenario in scenarios" :key="scenario.id" :value="scenario.escenario">
                               {{ scenario.escenario }}
                           </option>
                       </select>
