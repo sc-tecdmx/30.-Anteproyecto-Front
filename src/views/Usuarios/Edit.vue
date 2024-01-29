@@ -140,10 +140,10 @@
 import { onMounted, ref } from 'vue';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
 export default {
-    name: 'Create',
+    name: 'Edit',
     components: { },
     setup() {
         const user = ref({
@@ -159,11 +159,13 @@ export default {
         const roles = ref([]);
         const areas = ref([]);
 
-        const route = useRouter();
+        const router = useRouter();
+        const route = useRoute();
 
         const getUser = async () => {
             try {
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/usuarios/${route.params.id}`);
+                // user.value = response.data
                 user.value = {
                     ...response.data,
                     rol_id: response.data.roles[0].id,
@@ -213,7 +215,7 @@ export default {
         }
         
         const cancel = () => {
-            route.push('/usuarios')
+            router.push('/usuarios')
         }
 
         onMounted(() => {

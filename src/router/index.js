@@ -28,6 +28,7 @@ import Usuarios from '../views/Usuarios/Index.vue';
 import UsuariosCrear from '../views/Usuarios/Create.vue';
 import UsuariosInfo from '../views/Usuarios/Info.vue';
 import UsuariosAsignar from '../views/Usuarios/Assign.vue';
+import UsuariosEditar from '../views/Usuarios/Edit.vue';
 // Sección de reportes
 import Reportes from '../views/Reportes/Index.vue';
 // Configuración
@@ -166,6 +167,11 @@ const routes = [
     path: '/usuarios/:id/asignar',
     name: 'UsuariosAsignar',
     component: UsuariosAsignar
+  },
+  {
+    path: '/usuarios/:id/editar',
+    name: 'UsuariosEditar',
+    component: UsuariosEditar
   },
   // Reportes
   {
