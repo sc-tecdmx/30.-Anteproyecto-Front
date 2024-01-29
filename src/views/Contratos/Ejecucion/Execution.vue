@@ -36,12 +36,6 @@
                             <div class="col-6 d-flex align-items-center ml-10">
                                 <h6 class="mb-0">Ejecución</h6>
                             </div>
-                            <!--<div class="col-6 text-end">
-                                <button class="btn btn-dark" color="dark" variant="gradient" @click="add()">
-                                    <i class="fas fa-plus me-2"></i>
-                                    Agregar
-                                </button>
-                            </div>-->
                         </div>
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
@@ -89,7 +83,7 @@
 
 <script>
 import axios from 'axios';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import DetailAgreement from '@/components/DetailAgreement.vue';
 import Swal from 'sweetalert2';
@@ -144,8 +138,6 @@ export default {
         }
 
         const updateExecution = async () => {
-            // router.push(`/contratos/ejecucion/${execution}/editar`)
-            console.log(months.value)
             await axios.put(`${process.env.VUE_APP_API_URL}/contratos/${route.params.id}/ejecucion`, months.value)
                 .then(() => {
                     Swal.fire(
@@ -171,6 +163,19 @@ export default {
 
         const back = () => {
             router.push('/contratos')
+        }
+
+        watch(months, (newMonths, oldMonths) => {
+            calculateTotal();
+        }, { deep: true });
+
+        const calculateTotal = () => {
+            let totalValue = 0;
+            months.value.forEach(month => {
+                totalValue += parseFloat(month.costo) || 0;
+            });
+
+            total.value = totalValue.toFixed(2);
         }
 
         onMounted(() => {
