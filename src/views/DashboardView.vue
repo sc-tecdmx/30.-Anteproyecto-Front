@@ -1,5 +1,11 @@
 <template>
   <div class="py-4 container-fluid">
+    <div v-if="isLoading" class="text-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+      <p>Cargando...</p>
+    </div>
     <div class="row">
       <div class="col-lg-12">
         <div class="row">
@@ -150,6 +156,7 @@ export default {
         const months = ref([]);
         const programs = ref([]);
         const chapters = ref([]);
+        const isLoading = ref(true);
 
         const getDataCards = async () => {
             try {
@@ -195,6 +202,8 @@ export default {
                 getChart();
             } catch (error) {
                 console.log(error);
+            } finally {
+              isLoading.value = false;
             }
         }
 

@@ -93,6 +93,9 @@ export default createStore({
             commit('auth_logout_error');
             localStorage.removeItem('token');
             localStorage.removeItem('user');
+            localStorage.removeItem('responsables');
+            localStorage.removeItem('ejercicio');
+            localStorage.removeItem('escenario');
             delete axios.defaults.headers.common['Authorization'];
             delete axios.defaults.headers.common['ejercicio'];
             delete axios.defaults.headers.common['Responsables'];

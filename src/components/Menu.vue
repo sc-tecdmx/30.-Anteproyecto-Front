@@ -3,7 +3,7 @@
     <nav class="nav flex-column" v-if="isSidebarOpen">
       <router-link to="/dashboard" class="nav-link">
         <font-awesome-icon icon="gauge" />
-        Dashboard
+        Inicio
       </router-link>
       <router-link to="/contratos" class="nav-link">
         <font-awesome-icon icon="file-lines" />
@@ -49,7 +49,7 @@
           <font-awesome-icon icon="file-lines" />
         </span>
       </router-link>
-      <router-link to="/reportesCosas" class="nav-link" v-if="user.rol == 1 || user.rol == 2 || user.rol == 3">
+      <router-link to="/reportes" class="nav-link" v-if="user.rol == 1 || user.rol == 2 || user.rol == 3">
         <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" title="Reportes">
           <font-awesome-icon icon="file-export" />
         </span>
@@ -69,11 +69,6 @@
           <font-awesome-icon icon="arrows-split-up-and-left" />
         </span>
       </router-link>
-      <!--<router-link to="/catalogos/unidades-medida" class="nav-link" v-if="user.rol != 2">
-        <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" title="Unidades de medida">
-          <font-awesome-icon icon="weight-scale" />
-        </span>
-      </router-link>-->
       <router-link to="/usuarios" class="nav-link" v-if="user.rol == 1 || user.rol == 2 || user.rol == 3">
         <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" title="Usuarios">
           <font-awesome-icon icon="users" />

@@ -8,7 +8,8 @@
         <div class="col-10">
           <h5 class="card-title">{{ title }}</h5>
           <p class="card-text">
-            <span class="fs-4">{{ value }}</span>
+            <span class="fs-4" v-if="title == 'Costo Total'">{{ new Intl.NumberFormat('es-mx').format(value) }}</span>
+            <span class="fs-4" v-else>{{ value }}</span>
           </p>
         </div>
       </div>

@@ -44,8 +44,9 @@ export default {
     const logout = () => {
         store.dispatch('logout')
         .then(() => {
-          console.log('Inicio de sesión exitoso');
+          console.log('Cierre de sesión exitoso');
           router.push('/');
+          console.log('Ruteo exitoso');
         })
         .catch(error => {
           console.error('Error de cierre de sesión:', error);
