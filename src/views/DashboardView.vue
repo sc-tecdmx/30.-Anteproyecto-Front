@@ -32,10 +32,10 @@
                     <tbody>
                         <tr v-for="(chapter, index) in chapters" :key="index">
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ chapter.capitulo }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ chapter.capitulo }} - {{ chapter.descripcion }}</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx').format(chapter.valor) }}</p>
+                                <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx').format(chapter.costo_total) }}</p>
                             </td>
                         </tr>
                     </tbody>
@@ -197,8 +197,8 @@ export default {
         const getChaptersCost = async () => {
             try {
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/dashboard/capitulos`)
-                // chapters.value = response.data
-                chapters.value = Object.entries(response.data).map(([capitulo, valor]) => ({ capitulo, valor }));
+                chapters.value = response.data
+                // chapters.value = Object.entries(response.data).map(([capitulo, valor]) => ({ capitulo, valor }));
                 getChart();
             } catch (error) {
                 console.log(error);
@@ -215,7 +215,7 @@ export default {
             labels: chapters.value.map((chapter) => chapter.capitulo),
             datasets: [{
               label: 'Gasto por capítulo',
-              data: chapters.value.map((chapter) => chapter.valor),
+              data: chapters.value.map((chapter) => chapter.costo_total),
               hoverOffset: 4
             }]
           };
