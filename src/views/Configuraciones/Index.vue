@@ -120,12 +120,13 @@ export default {
 
         const add = async () => {
             try {
-                await axios.get(`${process.env.VUE_APP_API_URL}/anteproyecto/ejercicio`)
+                await axios.get(`${process.env.VUE_APP_API_URL}/configuracion/ejercicio`)
                 Swal.fire({
                     title: "¡Hecho!",
                     text: "El ejercicio ha sido creado correctamente",
                     icon: "success"
                 });
+                getExercises();
             } catch (error) {
                 console.error(error);
                 Swal.fire({

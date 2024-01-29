@@ -47,7 +47,7 @@
                     </div>
                     <div class="row">
                       <div class="col-12 text-center">
-                        <button class="btn btn-azul btn-lg" type="submit">Login</button>
+                        <button class="btn btn-azul btn-lg" type="submit">Iniciar sesión</button>
                       </div>
                     </div>
                     <!--<p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">¿Olvidaste tu contraseña?</a></p>-->
