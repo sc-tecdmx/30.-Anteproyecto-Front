@@ -66,7 +66,7 @@
                                             </button>
                                         </div>
                                         <div class="col-3">
-                                            <button class="btn btn-info" @click="detail(item.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver">
+                                            <button class="btn btn-info" @click="detail(item.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver Información">
                                                 <font-awesome-icon icon="fa-solid fa-info" />
                                             </button>
                                         </div>

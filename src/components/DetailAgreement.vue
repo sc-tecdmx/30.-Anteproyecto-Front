@@ -1,7 +1,7 @@
 <template>
-    <div class="row">
+    <div class="row px-4">
         <div class="col-12 text-start mt-3">
-            <p class="fw-lighter">Unidad Responsable del Gasto</p>
+            <p class="fw-lighter h4">Unidad Responsable del Gasto</p>
         </div>
         <div class="col-2 text-start">
             <p><b>Número: </b>{{ agreement.urg }}</p>
@@ -10,7 +10,7 @@
             <p><b>Descripción: </b>{{ agreement.urg_nombre }}</p>
         </div>
         <div class="col-12 text-start">
-            <p class="fw-lighter">Partida</p>
+            <p class="fw-lighter h4">Partida</p>
         </div>
         <div class="col-2 text-start">
             <p><b>Número: </b>{{ agreement.partida }}</p>
@@ -19,7 +19,7 @@
             <p><b>Descripción: </b>{{ agreement.descripcion_partida }}</p>
         </div>
         <div class="col-12 text-start">
-            <p class="fw-lighter">Concepto</p>
+            <p class="fw-lighter h4">Concepto</p>
         </div>
         <div class="col-2 text-start">
             <p><b>Número: </b>{{ agreement.concepto }}</p>
@@ -28,7 +28,7 @@
             <p><b>Descripción: </b>{{ agreement.concepto_descripcion }}</p>
         </div>
         <div class="col-12 text-start">
-            <p class="fw-lighter">Capítulo</p>
+            <p class="fw-lighter h4">Capítulo</p>
         </div>
         <div class="col-2 text-start">
             <p><b>Número: </b>{{ agreement.capitulo }}</p>
@@ -37,7 +37,7 @@
             <p><b>Descripción: </b>{{ agreement.capitulo_descripcion }}</p>
         </div>
         <div class="col-12 text-start">
-            <p class="fw-lighter">Detalle del contrato</p>
+            <p class="fw-lighter h4">Detalle del contrato</p>
         </div>
         <div class="col-3 text-start">
             <p><b>Clave: </b>{{ agreement.clave }}</p>
