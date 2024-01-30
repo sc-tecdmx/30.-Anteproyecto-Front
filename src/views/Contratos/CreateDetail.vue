@@ -9,6 +9,9 @@
                         </div>
                     </div>
                      <div class="card-body">
+                        <detail-agreement 
+                            :agreement="agreement"
+                        />
                         <form @submit.prevent="store">
                             <div class="row">
                                 <div class="col-md-4">
@@ -72,15 +75,29 @@ import { onMounted, ref } from 'vue';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useRoute, useRouter } from 'vue-router';
+import DetailAgreement from '@/components/DetailAgreement.vue';
 
 export default {
     name: 'CreateDetail',
-    components: { },
+    components: { DetailAgreement },
     setup() {
         const detail = ref({
             cantidad: '',
             costo_unitario: 0.0,
             unidad_medida_id: ''
+        });
+        const agreement = ref({
+            id: '',
+            urg: '',
+            urg_nombre: '',
+            partida: '',
+            descripcion_partida: '',
+            concepto: '',
+            concepto_descripcion: '',
+            capitulo: '',
+            capitulo_descripcion: '',
+            clave: '',
+            descripcion: ''
         });
         const detailExists = ref(false);
         const measurements = ref([]);
@@ -97,6 +114,7 @@ export default {
                     detail.costo_unitario = response.data.costo_unitario;
                     detail.unidad_medida_id = response.data.unidad_medida_id;
                 }
+                agreement.value = response.data
             } catch (error) {
                 console.error(error);
             }
@@ -163,6 +181,7 @@ export default {
         return {
             detail,
             measurements,
+            agreement,
             store,
             cancel
         }

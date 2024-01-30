@@ -1,49 +1,40 @@
 <template>
-    <div class="row px-4">
-        <div class="col-12 text-start mt-3">
-            <p class="fw-lighter h4">Unidad Responsable del Gasto</p>
+    <div class="row px-4 mt-3">
+        <div class="col-4 text-start">
+            <p><b>Unidad responsable del gasto</b><br>
+            {{ agreement.urg }} - {{ agreement.urg_nombre }}</p>
         </div>
-        <div class="col-2 text-start">
-            <p><b>Número: </b>{{ agreement.urg }}</p>
+        <div class="col-4 text-start">
+            <p><b>Capítulo</b><br>
+            {{ agreement.capitulo }} - {{ agreement.capitulo_descripcion }}</p>
         </div>
-        <div class="col-10 text-start">
-            <p><b>Descripción: </b>{{ agreement.urg_nombre }}</p>
+        <div class="col-4 text-start">
+            <p><b>Concepto</b><br>
+            {{ agreement.concepto }} - {{ agreement.concepto_descripcion }}</p>
         </div>
-        <div class="col-12 text-start">
-            <p class="fw-lighter h4">Partida</p>
+        <div class="col-4 text-start">
+            <p><b>Partida</b><br>
+            {{ agreement.partida }}</p>
         </div>
-        <div class="col-2 text-start">
-            <p><b>Número: </b>{{ agreement.partida }}</p>
+        <div class="col-4 text-start">
+            <p><b>Clave</b><br>
+            {{ agreement.clave }}</p>
         </div>
-        <div class="col-10 text-start">
-            <p><b>Descripción: </b>{{ agreement.descripcion_partida }}</p>
+        <div class="col-4 text-start">
+            <p><b>Descripción</b><br>
+            {{ agreement.descripcion }}</p>
         </div>
-        <div class="col-12 text-start">
-            <p class="fw-lighter h4">Concepto</p>
+        <div class="col-4 text-start">
+            <p><b>Importe</b><br>
+            ${{ new Intl.NumberFormat('es-mx').format(agreement.importe) }}</p>
         </div>
-        <div class="col-2 text-start">
-            <p><b>Número: </b>{{ agreement.concepto }}</p>
+        <div class="col-4 text-start">
+            <p><b>Parcialidad</b><br>
+            {{ agreement.parcialidad }}</p>
         </div>
-        <div class="col-10 text-start">
-            <p><b>Descripción: </b>{{ agreement.concepto_descripcion }}</p>
-        </div>
-        <div class="col-12 text-start">
-            <p class="fw-lighter h4">Capítulo</p>
-        </div>
-        <div class="col-2 text-start">
-            <p><b>Número: </b>{{ agreement.capitulo }}</p>
-        </div>
-        <div class="col-10 text-start">
-            <p><b>Descripción: </b>{{ agreement.capitulo_descripcion }}</p>
-        </div>
-        <div class="col-12 text-start">
-            <p class="fw-lighter h4">Detalle del contrato</p>
-        </div>
-        <div class="col-3 text-start">
-            <p><b>Clave: </b>{{ agreement.clave }}</p>
-        </div>
-        <div class="col-6 text-start">
-            <p><b>Descripción: </b>{{ agreement.descripcion }}</p>
+        <div class="col-4 text-start">
+            <p><b>Tipo</b><br>
+            {{ agreement.tipo }}</p>
         </div>
     </div>
 </template>
