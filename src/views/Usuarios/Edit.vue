@@ -94,7 +94,6 @@
                                         id="password"
                                         v-model="user.password"
                                         placeholder="Password"
-                                        required
                                     />
                                 </div>
                                 <div class="col-md-4">
@@ -202,7 +201,7 @@ export default {
                         'El usuario ha sido actualizado correctamente',
                         'success'
                     );
-                    route.push('/usuarios');
+                    router.push('/usuarios');
                 })
                 .catch((err) => {
                     console.error(err);

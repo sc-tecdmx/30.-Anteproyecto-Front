@@ -25,10 +25,10 @@
         <font-awesome-icon icon="arrows-split-up-and-left" />
         Partidas
       </router-link>
-      <!--<router-link to="/catalogos/unidades-medida" class="nav-link" v-if="user.rol != 2">
+      <router-link to="/catalogos/unidades-medida" class="nav-link" v-if="user.rol == 1 || user.rol == 3">
         <font-awesome-icon icon="weight-scale" />
         Unidades de Medida
-      </router-link>-->
+      </router-link>
       <router-link to="/usuarios" class="nav-link" v-if="user.rol == 1 || user.rol == 2 || user.rol == 3">
         <font-awesome-icon icon="users" />
         Usuarios
@@ -68,6 +68,9 @@
         <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" title="Partidas">
           <font-awesome-icon icon="arrows-split-up-and-left" />
         </span>
+      </router-link>
+      <router-link to="/catalogos/unidades-medida" class="nav-link" v-if="user.rol == 1 || user.rol == 3">
+        <font-awesome-icon icon="weight-scale" />
       </router-link>
       <router-link to="/usuarios" class="nav-link" v-if="user.rol == 1 || user.rol == 2 || user.rol == 3">
         <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" title="Usuarios">

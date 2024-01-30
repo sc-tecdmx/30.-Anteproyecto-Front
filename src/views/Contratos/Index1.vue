@@ -60,7 +60,7 @@
                             >
                                 <template #item-operation="item">
                                     <div class="row">
-                                        <div class="col-3">
+                                        <div class="col-3" v-if="user.rol == 1 || user.rol == 3">
                                             <button class="btn btn-secondary" @click="createDetail(item.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar Detalle">
                                                 <font-awesome-icon icon="fa-solid fa-file-circle-plus" />
                                             </button>
@@ -99,10 +99,11 @@
 
 <script>
 import axios from 'axios';
-import { ref, onMounted, reactive } from 'vue';
+import { ref, onMounted, reactive, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import Vue3Datatable from '@bhplugin/vue3-datatable';
 import '@bhplugin/vue3-datatable/dist/style.css';
+import { useStore } from 'vuex'; 
 
 export default {
     name: 'Index',
@@ -111,6 +112,9 @@ export default {
         const agreements = ref([]);
         const searchField = ref('');
         const searchValue = ref('');
+        const store = useStore();
+
+        const user = computed(() => store.getters.userLogged);
 
         const sortBy = ["urg", "partida", "capitulo", "concepto", "clave"];
         const sortType = ["desc", "asc"];
@@ -184,7 +188,8 @@ export default {
             execution,
             edit,
             createDetail,
-            importar
+            importar,
+            user
         }
     }
 }
