@@ -5,7 +5,7 @@
                 <div class="card">
                     <div class="card-header pb-0">
                         <div class="d-flex align-items-center">
-                            <p class="mb-0">Crear contrato</p>
+                            <p class="mb-0">Actualizar contrato</p>
                         </div>
                     </div>
                      <div class="card-body">
@@ -143,7 +143,6 @@ export default {
             try {
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/contratos/${route.params.id}`);
                 agreement.value = response.data;
-                agreement.value.partida_id = response.data.partida;
             } catch (error) {
                 console.log(error);
             }

@@ -61,22 +61,22 @@
                                 <template #item-operation="item">
                                     <div class="row">
                                         <div class="col-3">
-                                            <button class="btn btn-secondary" @click="createDetail(item.id)">
+                                            <button class="btn btn-secondary" @click="createDetail(item.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar Detalle">
                                                 <font-awesome-icon icon="fa-solid fa-file-circle-plus" />
                                             </button>
                                         </div>
                                         <div class="col-3">
-                                            <button class="btn btn-info" @click="detail(item.id)">
+                                            <button class="btn btn-info" @click="detail(item.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver">
                                                 <font-awesome-icon icon="fa-solid fa-info" />
                                             </button>
                                         </div>
                                         <div class="col-3">
-                                            <button class="btn btn-primary" @click="edit(item.id)">
+                                            <button class="btn btn-primary" @click="edit(item.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
                                                 <font-awesome-icon icon="fa-solid fa-pen-to-square" />
                                             </button>
                                         </div>
                                         <div class="col-3">
-                                            <button class="btn btn-success" @click="execution(item.id)">
+                                            <button class="btn btn-success" @click="execution(item.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar ejecución">
                                                 <font-awesome-icon icon="fa-solid fa-circle-play" />
                                             </button>
                                         </div>

@@ -43,146 +43,174 @@ const routes = [
   {
     path: '/dashboard',
     name: 'dashboard',
-    component: DashboardView
+    component: DashboardView,
+    meta: { requiresAuth: true },
   },
   // contratos
   {
     path: '/contratos',
     name: 'Contratos',
-    component: Contrato
+    component: Contrato,
+    meta: { requiresAuth: true },
   },
   {
     path: '/contratos/crear',
     name: 'ContratosCrear',
-    component: ContratoCrear
+    component: ContratoCrear,
+    meta: { requiresAuth: true },
   },
   {
     path: "/contratos/:id/detalle",
     name: "DetalleContrato",
-    component: DetalleContrato
+    component: DetalleContrato,
+    meta: { requiresAuth: true },
   },
   {
     path: "/contratos/:id/editar",
     name: "ContratosEditar",
-    component: ContratoEditar
+    component: ContratoEditar,
+    meta: { requiresAuth: true },
   },
   {
     path: "/contratos/:id/versiones",
     name: "VersionesContrato",
-    component: VersionesContrato
+    component: VersionesContrato,
+    meta: { requiresAuth: true },
   },
   {
     path: "/contratos/:id/versiones/crear",
     name: "VersionesContratoCrear",
-    component: VersionesContratoCrear
+    component: VersionesContratoCrear,
+    meta: { requiresAuth: true },
   },
   {
     path: "/contratos/:id/versiones/editar",
     name: "VersionesContratoEditar",
-    component: VersionesContratoEditar
+    component: VersionesContratoEditar,
+    meta: { requiresAuth: true },
   },
   {
     path: "/contratos/:id/ejecucion",
     name: "EjecucionContrato",
-    component: DetalleEjecucionContrato
+    component: DetalleEjecucionContrato,
+    meta: { requiresAuth: true },
   },
   {
     path: "/contratos/:id/ejecucion/crear",
     name: "EjecucionContratoCrear",
-    component: EjecucionContratoCrear
+    component: EjecucionContratoCrear,
+    meta: { requiresAuth: true },
   },
   {
     path: "/contratos/ejecucion/:id/editar",
     name: "EjecucionContratoEditar",
-    component: EjecucionContratoEditar
+    component: EjecucionContratoEditar,
+    meta: { requiresAuth: true },
   },
   {
     path: "/contratos/:id/detalle/crear",
     name: "DetalleContratoCrear",
-    component: DetalleContratoCrear
+    component: DetalleContratoCrear,
+    meta: { requiresAuth: true },
   },
   {
     path: "/contratos/importar",
     name: "ContratosImportar",
     component: ContratoImportar,
+    meta: { requiresAuth: true },
   },
   // catalogos 
   {
     path: "/catalogos/partidas",
     name: "Partidas",
     component: Partida,
+    meta: { requiresAuth: true },
   },
   {
     path: "/catalogos/partidas/crear",
     name: "CrearPartidas",
     component: CrearPartida,
+    meta: { requiresAuth: true },
   },
   {
     path: "/catalogos/partidas/:id/editar",
     name: "EditarPartidas",
     component: EditarPartida,
+    meta: { requiresAuth: true },
   },
   {
     path: "/catalogos/conceptos",
     name: "Conceptos",
     component: Concepto,
+    meta: { requiresAuth: true },
   },
   {
     path: "/catalogos/conceptos/crear",
     name: "CrearConcepto",
     component: CrearConcepto,
+    meta: { requiresAuth: true },
   },
   {
     path: "/catalogos/capitulos",
     name: "Capitulos",
     component: Capitulo,
+    meta: { requiresAuth: true },
   },
   {
     path: "/catalogos/unidades-medida",
     name: "UnidadesMedida",
     component: UnidadesMedida,
+    meta: { requiresAuth: true },
   },
   {
     path: "/catalogos/unidades-medida/crear",
     name: "UnidadesMedidaCrear",
     component: UnidadesMedidaCrear,
+    meta: { requiresAuth: true },
   },
   // fin de sección catalogos
   {
     path: '/usuarios',
     name: 'Usuarios',
-    component: Usuarios
+    component: Usuarios,
+    meta: { requiresAuth: true },
   },
   {
     path: '/usuarios/crear',
     name: 'UsuariosCrear',
-    component: UsuariosCrear
+    component: UsuariosCrear,
+    meta: { requiresAuth: true },
   },
   {
     path: '/usuarios/:id/info',
     name: 'UsuariosInfo',
-    component: UsuariosInfo
+    component: UsuariosInfo,
+    meta: { requiresAuth: true },
   },
   {
     path: '/usuarios/:id/asignar',
     name: 'UsuariosAsignar',
-    component: UsuariosAsignar
+    component: UsuariosAsignar,
+    meta: { requiresAuth: true },
   },
   {
     path: '/usuarios/:id/editar',
     name: 'UsuariosEditar',
-    component: UsuariosEditar
+    component: UsuariosEditar,
+    meta: { requiresAuth: true },
   },
   // Reportes
   {
     path: '/reportes',
     name: 'Reportes',
-    component: Reportes
+    component: Reportes,
+    meta: { requiresAuth: true },
   },
   {
     path: '/configuracion',
     name: 'Configuracion',
-    component: Configuracion
+    component: Configuracion,
+    meta: { requiresAuth: true },
   },
   {
     path: '/about',
