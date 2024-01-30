@@ -14,7 +14,7 @@
         </div>
         <div class="col-4 text-start">
             <p><b>Partida</b><br>
-            {{ agreement.partida }}</p>
+            {{ agreement.partida }} - {{ agreement.descripcion_partida }}</p>
         </div>
         <div class="col-4 text-start">
             <p><b>Clave</b><br>
