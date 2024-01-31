@@ -80,7 +80,7 @@ import DetailAgreement from '@/components/DetailAgreement.vue';
 export default {
     name: 'CreateDetail',
     components: { DetailAgreement },
-    setup() {
+    setup(props, context) {
         const detail = ref({
             cantidad: '',
             costo_unitario: 0.0,
@@ -107,6 +107,7 @@ export default {
 
         const getAgreement = async () => {
             try {
+                context.emit('loading', true);
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/contratos/${route.params.id}`)
                 if (response.data.cantidad) {
                     detailExists.value = true;
@@ -117,6 +118,8 @@ export default {
                 agreement.value = response.data
             } catch (error) {
                 console.error(error);
+            } finally {
+                context.emit('loading', false);
             }
         }
 
@@ -131,6 +134,7 @@ export default {
 
         const store = async () => {
             if (detailExists) {
+                context.emit('loading', true);
                 await axios.put(`${process.env.VUE_APP_API_URL}/contratos/${route.params.id}/detalle`, detail.value)
                     .then(() => {
                         Swal.fire(
@@ -148,7 +152,11 @@ export default {
                             'error'
                         );
                     })
+                    .finally(() => {
+                        context.emit('loading', false);
+                    })
             } else {
+                context.emit('loading', true);
                 await axios.post(`${process.env.VUE_APP_API_URL}/contratos/${route.params.id}/detalle`, detail.value)
                     .then(() => {
                         Swal.fire(
@@ -165,6 +173,9 @@ export default {
                             'Hubo un error al guardar la información',
                             'error'
                         );
+                    })
+                    .finally(() => {
+                        context.emit('loading', false);
                     })
             }
         }

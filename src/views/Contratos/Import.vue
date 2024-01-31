@@ -49,7 +49,7 @@ import { useRouter } from 'vue-router';
 export default {
     name: 'Create',
     components: { },
-    setup() {
+    setup(props, context) {
         const file = ref();
         const templateFile = ref('/templateImport.xlsx');
 
@@ -58,6 +58,7 @@ export default {
         const store = async () => {
             let data = new FormData();
             data.append('file', file.value);
+            context.emit('loading', true);
             await axios.post(`${process.env.VUE_APP_API_URL}/contratos/importar`, data)
                 .then(() => {
                     Swal.fire(
@@ -74,6 +75,9 @@ export default {
                         'Hubo un error al importar la información',
                         'error'
                     );
+                })
+                .finally(() => {
+                    context.emit('loading', false);
                 })
         }
 
@@ -107,6 +111,7 @@ export default {
 
         const downloadTemplate = async () => {
             try {
+                context.emit('loading', true);
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/contratos/plantilla`, {
                     responseType: 'blob'
                 })
@@ -124,6 +129,8 @@ export default {
                     'Hubo un error al descargar el archivo, por favor intentalo mas tarde.',
                     'error'
                 )
+            } finally {
+                context.emit('loading', false);
             }
         }
 

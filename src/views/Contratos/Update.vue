@@ -106,7 +106,7 @@ import { useRouter, useRoute } from 'vue-router';
 export default {
     name: 'Update',
     components: { },
-    setup() {
+    setup(props, context) {
         const agreement = ref({
             partida_id: '',
             descripcion: '',
@@ -141,14 +141,18 @@ export default {
 
         const getAgreement = async () => {
             try {
+                context.emit('loading', true);
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/contratos/${route.params.id}`);
                 agreement.value = response.data;
             } catch (error) {
                 console.log(error);
+            } finally {
+                context.emit('loading', false);
             }
         }
 
         const store = async () => {
+            context.emit('loading', true);
             await axios.post(`${process.env.VUE_APP_API_URL}/contratos`, agreement.value)
                 .then(() => {
                     Swal.fire(
@@ -165,6 +169,9 @@ export default {
                         'Hubo un error al guardar la información',
                         'error'
                     );
+                })
+                .finally(() => {
+                    context.emit('loading', false);
                 })
         }
 

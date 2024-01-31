@@ -10,7 +10,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body px-0 pt-0 pb-2">
+                    <div class="card-body px-0 pt-0 pb-2 px-4">
                         <div class="row mt-3">
                             <div class="col-10">
                                 <p>Reporte de contratos</p>
@@ -73,7 +73,7 @@ import Swal from 'sweetalert2';
 export default {
     name: 'Index',
     components: { },
-    setup() {
+    setup(props, context) {
         const router = useRouter();
 
         /**
@@ -99,6 +99,7 @@ export default {
 
         const exportAgreement = async () => {
             try {
+                context.emit('loading', true);
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/reportes/contratos`, {
                     responseType: 'blob'
                 })
@@ -117,11 +118,14 @@ export default {
                     'Hubo un error al exportar el archivo, por favor intentalo mas tarde.',
                     'error'
                 )
+            } finally {
+                context.emit('loading', false);
             }
         }
 
         const exportExecution = async () => {
             try {
+                context.emit('loading', true);
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/reportes/contratos/ejecucion`, {
                     responseType: 'blob'
                 })
@@ -139,11 +143,14 @@ export default {
                     'Hubo un error al exportar el archivo, por favor intentalo mas tarde.',
                     'error'
                 )
+            } finally {
+                context.emit('loading', false);
             }
         }
 
         const exportIntegration = async () => {
             try {
+                context.emit('loading', true);
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/reportes/contratos/capitulos`, {
                     responseType: 'blob'
                 })
@@ -161,11 +168,14 @@ export default {
                     'Hubo un error al exportar el archivo, por favor intentalo mas tarde.',
                     'error'
                 )
+            } finally {
+                context.emit('loading', false);
             }
         }
 
         const exportChapterConcept = async () => {
             try {
+                context.emit('loading', true);
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/reportes/contratos/capitulos-conceptos`, {
                     responseType: 'blob'
                 })
@@ -183,6 +193,8 @@ export default {
                     'Hubo un error al exportar el archivo, por favor intentalo mas tarde.',
                     'error'
                 )
+            } finally {
+                context.emit('loading', false);
             }
         }
 

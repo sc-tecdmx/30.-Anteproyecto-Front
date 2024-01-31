@@ -45,7 +45,7 @@
                 <div class="card-header pb-0">
                   <div class="row mb-2">
                     <div class="col-6">
-                      <h6 class="agreement-title">Contratos por capítulo</h6>
+                      <h6 class="agreement-title">Contratos del capítulo {{ detail.capitulo }}</h6>
                     </div>
                     <div class="col-6 text-end">
                       <button type="button" class="btn btn-danger text-right" @click="closeDetail()"> Cerrar</button>
@@ -61,13 +61,21 @@
                       </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(agreement, index) in agreements" :key="index">
+                        <tr v-for="(agreement, index) in detail.contratos" :key="index">
                             <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ agreement.clave }}</p>
                             </td>
                             <td class="numbers">
                                 <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx').format(agreement.importe) }}</p>
                             </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">Total</p>
+                          </td>
+                          <td class="numbers">
+                            <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx').format(detail.total) }}</p>
+                          </td>
                         </tr>
                     </tbody>
                   </table>
@@ -187,7 +195,11 @@ export default {
         const months = ref([]);
         const programs = ref([]);
         const chapters = ref([]);
-        const agreements = ref([]);
+        const detail = ref({
+          capitulo: '',
+          contratos: [],
+          total: 0
+        });
         const showDetail = ref(false);
         const loading = ref(false);
 
@@ -267,7 +279,7 @@ export default {
           try {
             context.emit('loading', true);
             const response = await axios.get(`${process.env.VUE_APP_API_URL}/dashboard/capitulos/${chapter}`)
-            agreements.value = response.data
+            detail.value = response.data
             showDetail.value = true
           } catch (error) {
             console.log(error);
@@ -294,7 +306,7 @@ export default {
             months,
             programs,
             chapters,
-            agreements,
+            detail,
             showDetail,
             loading,
             getAgreements,

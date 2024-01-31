@@ -74,7 +74,7 @@ import '@bhplugin/vue3-datatable/dist/style.css';
 export default {
     name: 'Index',
     components: { },
-    setup() {
+    setup(props, context) {
         const exercises = ref([]);
 
         const headers= [
@@ -85,10 +85,13 @@ export default {
         
         const getExercises = async () => {
             try {
+                context.emit('loading', true);
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/ejercicios`);
                 exercises.value = response.data;
             } catch (error) {
                 console.log(error);
+            } finally {
+                context.emit('loading', false);
             }
         };
 

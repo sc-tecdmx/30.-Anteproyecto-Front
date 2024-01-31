@@ -145,7 +145,7 @@ import { useRouter } from 'vue-router';
 export default {
     name: 'Create',
     components: { },
-    setup() {
+    setup(props, context) {
         const user = ref({
             nombre: '',
             apellido_paterno: '',
@@ -180,6 +180,7 @@ export default {
         }
 
         const store = async () => {
+            context.emit('loading', true);
             await axios.post(`${process.env.VUE_APP_API_URL}/usuarios`, user.value)
                 .then(() => {
                     Swal.fire(
@@ -196,6 +197,9 @@ export default {
                         'Hubo un error al guardar la información',
                         'error'
                     );
+                })
+                .finally(() => {
+                    context.emit('loading', false);
                 })
         }
         

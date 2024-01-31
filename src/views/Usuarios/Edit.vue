@@ -144,7 +144,7 @@ import { useRouter, useRoute } from 'vue-router';
 export default {
     name: 'Edit',
     components: { },
-    setup() {
+    setup(props, context) {
         const user = ref({
             nombre: '',
             apellido_paterno: '',
@@ -163,6 +163,7 @@ export default {
 
         const getUser = async () => {
             try {
+                context.emit('loading', true);
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/usuarios/${route.params.id}`);
                 // user.value = response.data
                 user.value = {
@@ -172,6 +173,8 @@ export default {
                 };
             } catch (error) {
                 console.log(error);
+            } finally {
+                context.emit('loading', false);
             }
         }
 
@@ -194,6 +197,7 @@ export default {
         }
 
         const store = async () => {
+            context.emit('loading', true);
             await axios.put(`${process.env.VUE_APP_API_URL}/usuarios/${route.params.id}`, user.value)
                 .then(() => {
                     Swal.fire(
@@ -210,6 +214,9 @@ export default {
                         'Hubo un error al guardar la información',
                         'error'
                     );
+                })
+                .finally(() => {
+                    context.emit('loading', false);
                 })
         }
         

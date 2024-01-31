@@ -15,7 +15,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body px-0 pt-0 pb-2">
+                    <div class="card-body px-0 pt-0 pb-2 px-3 mt-2">
                         <div class="table-responsive p-0">
                             <DataTable :data="concepts" :columns="columns" class="table table-striped table-bordered display"
                                 :options="{ responsive: true, autoWidth: false, dom: 'Blftrip', paging: true, pageLength: 10, language: {
@@ -41,7 +41,6 @@
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                                         >Numero</th>
-                                        <th class="text-secondary opacity-7"></th>
                                     </tr>
                                 </thead>
                             </DataTable>
@@ -118,7 +117,7 @@ DataTable.use(ButtonsHtml5);
 export default {
     name: 'Index',
     components: { DataTable },
-    setup() {
+    setup(props, context) {
         const concepts = ref([]);
         const columns = ref([
             { data: null, render: function(data, type, row, meta)
@@ -159,10 +158,13 @@ export default {
 
         const getConcepts = async () => {
             try {
+                context.emit('loading', true);
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/conceptos`)
                 concepts.value = response.data;
             } catch (error) {
                 console.error(error);
+            } finally {
+                context.emit('loading', false);
             }
         }
 

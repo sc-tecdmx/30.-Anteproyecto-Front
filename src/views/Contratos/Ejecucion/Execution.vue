@@ -91,7 +91,7 @@ import Swal from 'sweetalert2';
 export default {
     name: 'Index',
     components: { DetailAgreement },
-    setup() {
+    setup(props, context) {
         const route = useRoute();
         const agreement = ref({
             id: '',
@@ -121,10 +121,13 @@ export default {
 
         const getAgreement = async () => {
             try {
+                context.emit('loading', true);
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/contratos/${route.params.id}`)
                 agreement.value = response.data;
             } catch (error) {
                 console.error(error);
+            } finally {
+                context.emit('loading', false);
             }
         }
 
@@ -138,6 +141,7 @@ export default {
         }
 
         const updateExecution = async () => {
+            context.emit('loading', true);
             await axios.put(`${process.env.VUE_APP_API_URL}/contratos/${route.params.id}/ejecucion`, months.value)
                 .then(() => {
                     Swal.fire(
@@ -154,6 +158,9 @@ export default {
                         'Hubo un error al guardar la información',
                         'error'
                     );
+                })
+                .finally(() => {
+                    context.emit('loading', false);
                 })
         }
 

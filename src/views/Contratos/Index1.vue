@@ -108,7 +108,7 @@ import { useStore } from 'vuex';
 export default {
     name: 'Index',
     components: {},
-    setup() {
+    setup(props, context) {
         const agreements = ref([]);
         const searchField = ref('');
         const searchValue = ref('');
@@ -139,10 +139,13 @@ export default {
 
         const getAgreements = async () => {
             try {
+                context.emit('loading', true);
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/contratos`)
                 agreements.value = response.data;
             } catch (error) {
                 console.error(error);
+            } finally {
+                context.emit('loading', false);
             }
         }
 

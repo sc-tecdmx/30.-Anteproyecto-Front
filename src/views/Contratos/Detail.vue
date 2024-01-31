@@ -41,7 +41,7 @@ import DetailAgreement from '@/components/DetailAgreement.vue';
 export default {
     name: 'Detail',
     components: { DetailAgreement },
-    setup() {
+    setup(props,context) {
         const route = useRoute();
         const router = useRouter();
         const agreement = ref({
@@ -60,10 +60,13 @@ export default {
 
         const getAgreement = async () => {
             try {
+                context.emit('loading', true);
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/contratos/${route.params.id}`)
                 agreement.value = response.data;
             } catch (error) {
                 console.error(error);
+            } finally {
+                context.emit('loading', false);
             }
         }
 

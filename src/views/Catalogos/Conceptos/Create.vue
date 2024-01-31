@@ -76,7 +76,7 @@ import { useRouter } from 'vue-router';
 export default {
     name: 'Create',
     components: { },
-    setup() {
+    setup(props, context) {
         const concept = ref({
             capitulo_id: '',
             descripcion: '',
@@ -97,6 +97,7 @@ export default {
         };
 
         const store = async () => {
+            context.emit('loading', true);
             await axios.post(`${process.env.VUE_APP_API_URL}/conceptos`, concept.value)
                 .then(() => {
                     Swal.fire(
@@ -113,6 +114,9 @@ export default {
                         'Hubo un error al guardar la información',
                         'error'
                     );
+                })
+                .finally(() => {
+                    context.emit('loading', false);
                 })
         }
 

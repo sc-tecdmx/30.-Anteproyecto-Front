@@ -99,7 +99,7 @@ import Swal from 'sweetalert2';
 export default {
     name: 'Assign',
     components: { UserInfo, Multiselect },
-    setup() {
+    setup(props, context) {
         const route = useRoute();
         const router = useRouter();
         const managers = ref([]);
@@ -122,10 +122,13 @@ export default {
 
         const getUser = async () => {
             try {
+                context.emit('loading', true);
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/usuarios/${route.params.id}`)
                 user.value = response.data;
             } catch (error) {
                 console.error(error);
+            } finally {
+                context.emit('loading', false);
             }
         }
 
@@ -144,6 +147,7 @@ export default {
 
         const store = async () => {
             // console.log(JSON.stringify(userManagers.value.responsables));
+            context.emit('loading', true);
             const responsables = {
                 responsables: JSON.stringify(userManagers.value.responsables)
             }
@@ -164,6 +168,9 @@ export default {
                         'Hubo un error al guardar la información',
                         'error'
                     );
+                })
+                .finally(() => {
+                    context.emit('loading', false);
                 })
         }
 

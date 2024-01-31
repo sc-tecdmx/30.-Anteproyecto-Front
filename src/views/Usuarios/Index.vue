@@ -121,7 +121,7 @@ import '@bhplugin/vue3-datatable/dist/style.css';
 export default {
     name: 'Index',
     components: { },
-    setup() {
+    setup(props, context) {
         const users = ref([]);
         const searchField = ref('');
         const searchValue = ref('');
@@ -184,10 +184,13 @@ export default {
 
         const getUsers = async () => {
             try {
+                context.emit('loading', true);
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/usuarios`)
                 users.value = response.data;
             } catch (error) {
                 console.error(error);
+            } finally {
+                context.emit('loading', false);
             }
         }
 

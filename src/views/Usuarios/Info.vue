@@ -41,7 +41,7 @@ import UserInfo from '@/components/UserInfo.vue';
 export default {
     name: 'Info',
     components: { UserInfo },
-    setup() {
+    setup(props, context) {
         const route = useRoute();
         const router = useRouter();
         const user = ref({
@@ -59,10 +59,13 @@ export default {
 
         const getUser = async () => {
             try {
+                context.emit('loading', true);
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/usuarios/${route.params.id}`)
                 user.value = response.data;
             } catch (error) {
                 console.error(error);
+            } finally {
+                context.emit('loading', false);
             }
         }
 

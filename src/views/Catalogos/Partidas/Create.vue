@@ -47,10 +47,17 @@
                                     />
                                 </div>
                             </div>
-                            <div class="mt-3 text-end">
-                                <button class="btn btn-dark" type="submit" color="primary">
-                                    Guardar
-                                </button>
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <button class="btn btn-danger" color="primary" @click="cancel">
+                                        Cancelar
+                                    </button>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <button class="btn btn-primary" type="submit" color="primary">
+                                        Guardar
+                                    </button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -69,7 +76,7 @@ import { useRouter } from 'vue-router';
 export default {
     name: 'Create',
     components: { },
-    setup() {
+    setup(props, context) {
         const concepts = ref([]);
         const split = ref({
             concepto_id: '',
@@ -93,6 +100,7 @@ export default {
         }
 
         const store = async () => {
+            context.emit('loading', true);
             await axios.post(`${process.env.VUE_APP_API_URL}/partidas`, split.value)
                 .then(() => {
                     Swal.fire(
@@ -110,6 +118,13 @@ export default {
                         'error'
                     );
                 })
+                .finally(() => {
+                    context.emit('loading', false);
+                })
+        }
+
+        const cancel = () => {
+            route.push('/catalogos/partidas');
         }
 
         onMounted(() => {
@@ -119,7 +134,8 @@ export default {
         return {
             concepts,
             split,
-            store
+            store,
+            cancel
         }
     }
 }

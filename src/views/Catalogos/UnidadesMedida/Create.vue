@@ -31,8 +31,8 @@
                                         Cancelar
                                     </button>
                                 </div>
-                                <div class="col-6">
-                                    <button class="btn btn-dark" type="submit" color="primary">
+                                <div class="col-6 text-end">
+                                    <button class="btn btn-primary" type="submit" color="primary">
                                         Guardar
                                     </button>
                                 </div>
@@ -54,7 +54,7 @@ import { useRouter } from 'vue-router';
 export default {
     name: 'Create',
     components: { },
-    setup() {
+    setup(props, context) {
         const measurement = ref({
             descripcion: ''
         });
@@ -62,6 +62,7 @@ export default {
         const route = useRouter();
 
         const store = async () => {
+            context.emit('loading', true);
             await axios.post(`${process.env.VUE_APP_API_URL}/unidades-medida`, measurement.value)
                 .then(() => {
                     Swal.fire(
@@ -78,6 +79,9 @@ export default {
                         'Hubo un error al guardar la información',
                         'error'
                     );
+                })
+                .finally(() => {
+                    context.emit('loading', false);
                 })
         }
 

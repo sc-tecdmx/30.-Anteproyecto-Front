@@ -16,7 +16,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body px-0 pt-0 pb-2">
+                    <div class="card-body px-0 pt-0 pb-2 px-4 mt-3">
                         <div class="table-responsive p-0">
                             <DataTable :data="measurements" :columns="columns" class="table table-striped table-bordered display"
                                 :options="{ responsive: true, autoWidth: false, dom: 'Blftrip', paging: true, pageLength: 10, language: {
@@ -69,7 +69,7 @@ DataTable.use(ButtonsHtml5);
 export default {
     name: 'Index',
     components: { DataTable }, 
-    setup() {
+    setup(props, context) {
         const measurements = ref([]);
         const columns = ref([
             { data: null, render: function(data, type, row, meta)
@@ -106,10 +106,13 @@ export default {
 
         const getUnitMeasurements = async () => {
             try {
+                context.emit('loading', true);
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/unidades-medida`)
                 measurements.value = response.data;
             } catch (error) {
                 console.error(error);
+            } finally {
+                context.emit('loading', false);
             }
         }
 
