@@ -265,11 +265,14 @@ export default {
 
         const getAgreements = async (chapter) => {
           try {
+            context.emit('loading', true);
             const response = await axios.get(`${process.env.VUE_APP_API_URL}/dashboard/capitulos/${chapter}`)
             agreements.value = response.data
             showDetail.value = true
           } catch (error) {
             console.log(error);
+          } finally {
+            context.emit('loading', false);
           }
         }
 
