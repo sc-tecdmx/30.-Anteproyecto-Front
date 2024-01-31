@@ -110,10 +110,11 @@ export default {
                 context.emit('loading', true);
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/contratos/${route.params.id}`)
                 if (response.data.cantidad) {
+                    console.log('Hay cantidad')
                     detailExists.value = true;
-                    detail.cantidad = response.data.cantidad;
-                    detail.costo_unitario = response.data.costo_unitario;
-                    detail.unidad_medida_id = response.data.unidad_medida_id;
+                    detail.value.cantidad = response.data.cantidad;
+                    detail.value.costo_unitario = response.data.costo_unitario;
+                    detail.value.unidad_medida_id = response.data.unidad_medida_id;
                 }
                 agreement.value = response.data
             } catch (error) {
@@ -133,30 +134,7 @@ export default {
         }
 
         const store = async () => {
-            if (detailExists) {
-                context.emit('loading', true);
-                await axios.put(`${process.env.VUE_APP_API_URL}/contratos/${route.params.id}/detalle`, detail.value)
-                    .then(() => {
-                        Swal.fire(
-                            '¡Éxito!',
-                            'El detalle ha sido guardado correctamente',
-                            'success'
-                        );
-                        router.push('/contratos');
-                    })
-                    .catch((err) => {
-                        console.error(err);
-                        Swal.fire(
-                            'Error!',
-                            'Hubo un error al guardar la información',
-                            'error'
-                        );
-                    })
-                    .finally(() => {
-                        context.emit('loading', false);
-                    })
-            } else {
-                context.emit('loading', true);
+            context.emit('loading', true);
                 await axios.post(`${process.env.VUE_APP_API_URL}/contratos/${route.params.id}/detalle`, detail.value)
                     .then(() => {
                         Swal.fire(
@@ -177,7 +155,6 @@ export default {
                     .finally(() => {
                         context.emit('loading', false);
                     })
-            }
         }
 
         const cancel = () => {
