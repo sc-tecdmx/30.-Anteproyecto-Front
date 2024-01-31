@@ -32,10 +32,41 @@
                     <tbody>
                         <tr v-for="(chapter, index) in chapters" :key="index">
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ chapter.capitulo }} - {{ chapter.descripcion }}</p>
+                                <p class="text-xs font-weight-bold mb-0">
+                                  <button type="button" class="btn btn-link" @click="getAgreements(chapter.capitulo)">
+                                    {{ chapter.capitulo }}
+                                  </button> 
+                                  - {{ chapter.descripcion }}
+                                </p>
                             </td>
-                            <td>
+                            <td class="numbers">
                                 <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx').format(chapter.costo_total) }}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="card mt-3" v-if="showDetail">
+                <div class="card-header pb-0">
+                  <div class="row mb-2">
+                    <div class="col-6">
+                      <h6 class="agreement-title">Contratos por capítulo</h6>
+                    </div>
+                    <div class="col-6 text-end">
+                      <button type="button" class="btn btn-danger text-right" @click="closeDetail()"> Cerrar</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-3 card-body">
+                  <table class="table mb-0">
+                    <tbody>
+                        <tr v-for="(agreement, index) in agreements" :key="index">
+                            <td>
+                                <p class="text-xs font-weight-bold mb-0">{{ agreement.clave }}</p>
+                            </td>
+                            <td class="numbers">
+                                <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx').format(agreement.importe) }}</p>
                             </td>
                         </tr>
                     </tbody>
@@ -157,6 +188,8 @@ export default {
         const programs = ref([]);
         const chapters = ref([]);
         const isLoading = ref(true);
+        const agreements = ref([]);
+        const showDetail = ref(false);
 
         const getDataCards = async () => {
             try {
@@ -226,6 +259,20 @@ export default {
           });
         }
 
+        const getAgreements = async (chapter) => {
+          try {
+            const response = await axios.get(`${process.env.VUE_APP_API_URL}/dashboard/capitulos/${chapter}`)
+            agreements.value = response.data
+            showDetail.value = true
+          } catch (error) {
+            console.log(error);
+          }
+        }
+
+        const closeDetail = () => {
+          showDetail.value = false
+        }
+
         onMounted(() => {
             getDataCards();
             getUrgsCost();
@@ -239,8 +286,21 @@ export default {
             urgs,
             months,
             programs,
-            chapters
+            chapters,
+            agreements,
+            showDetail,
+            getAgreements,
+            closeDetail
         };
     }
 }
 </script>
+
+<style scoped>
+.numbers {
+  text-align: right;
+}
+.agreement-title {
+  padding-top: 10px;
+}
+</style>
