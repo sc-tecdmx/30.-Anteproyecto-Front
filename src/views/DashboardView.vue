@@ -258,7 +258,6 @@ export default {
 
         const getChart = () => {
           const ctx = document.getElementById('myChart');
-          console.log(chapters.value.map((chapter) => chapter.capitulo))
 
           const data = {
             labels: chapters.value.map((chapter) => chapter.capitulo),
@@ -294,9 +293,6 @@ export default {
 
         onMounted(() => {
             getDataCards();
-            getUrgsCost();
-            getMonthsCost();
-            getProgramsCost();
             getChaptersCost();
         })
 

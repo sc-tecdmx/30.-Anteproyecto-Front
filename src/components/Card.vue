@@ -31,10 +31,6 @@ export default {
       type: String,
       required: true,
     },
-    detail: {
-      type: String,
-      required: true,
-    },
     titleColor: {
       type: String,
     },
