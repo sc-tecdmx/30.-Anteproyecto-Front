@@ -1,11 +1,5 @@
 <template>
   <div class="py-4 container-fluid">
-    <div v-if="isLoading" class="text-center">
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Cargando...</span>
-      </div>
-      <p>Cargando...</p>
-    </div>
     <div class="row">
       <div class="col-lg-12">
         <div class="row">
@@ -60,6 +54,12 @@
                 </div>
                 <div class="p-3 card-body">
                   <table class="table mb-0">
+                    <thead>
+                      <tr>
+                        <th>Clave Programatica</th>
+                        <th class="text-end">Monto</th>
+                      </tr>
+                    </thead>
                     <tbody>
                         <tr v-for="(agreement, index) in agreements" :key="index">
                             <td>
@@ -181,22 +181,25 @@ import Chart from 'chart.js/auto';
 export default {
     name: 'DashboardView',
     components: { Card },
-    setup() {
+    setup(props, context) {
         const cards = ref([]);
         const urgs = ref([]);
         const months = ref([]);
         const programs = ref([]);
         const chapters = ref([]);
-        const isLoading = ref(true);
         const agreements = ref([]);
         const showDetail = ref(false);
+        const loading = ref(false);
 
         const getDataCards = async () => {
             try {
+                context.emit('loading', true);
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/dashboard`)
                 cards.value = response.data
             } catch (error) {
                 console.log(error);
+            } finally {
+              context.emit('loading', false);
             }
         }
 
@@ -229,14 +232,15 @@ export default {
 
         const getChaptersCost = async () => {
             try {
-                const response = await axios.get(`${process.env.VUE_APP_API_URL}/dashboard/capitulos`)
-                chapters.value = response.data
-                // chapters.value = Object.entries(response.data).map(([capitulo, valor]) => ({ capitulo, valor }));
-                getChart();
+              context.emit('loading', true);
+              const response = await axios.get(`${process.env.VUE_APP_API_URL}/dashboard/capitulos`)
+              chapters.value = response.data
+              // chapters.value = Object.entries(response.data).map(([capitulo, valor]) => ({ capitulo, valor }));
+              getChart();
             } catch (error) {
                 console.log(error);
             } finally {
-              isLoading.value = false;
+              context.emit('loading', false);
             }
         }
 
@@ -289,6 +293,7 @@ export default {
             chapters,
             agreements,
             showDetail,
+            loading,
             getAgreements,
             closeDetail
         };
