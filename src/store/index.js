@@ -7,6 +7,8 @@ export default createStore({
       status: '',
       token: localStorage.getItem('token') || '',
       user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {},
+      exercise: localStorage.getItem('ejercicio') || '',
+      scenario: localStorage.getItem('escenario') || '',
       isSidebarOpen: true,
     };
   },
@@ -111,5 +113,7 @@ export default createStore({
     userLogged: (state) => state.user,
     token: (state) => state.token,
     isSidebarOpen: (state) => state.isSidebarOpen,
+    getExercise: (state) => state.exercise,
+    getScenario: (state) => state.scenario
   },
 });

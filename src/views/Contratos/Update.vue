@@ -153,7 +153,7 @@ export default {
 
         const store = async () => {
             context.emit('loading', true);
-            await axios.put(`${process.env.VUE_APP_API_URL}/contratos/${route.params.id}·`, agreement.value)
+            await axios.put(`${process.env.VUE_APP_API_URL}/contratos/${route.params.id}`, agreement.value)
                 .then(() => {
                     Swal.fire(
                         '¡Éxito!',

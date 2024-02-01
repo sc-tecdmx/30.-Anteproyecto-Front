@@ -95,25 +95,25 @@
               </div>
           </div>
         </div>
-        <!--<div class="row">
-          <div class="col-lg-6 mb-lg">
-            <div class="card z-index-2">
-              <div class="card">
-                <div class="pb-0 card-header mb-0">
-                  <h6>Costo por URG</h6>
-                </div>
-                <div class="p-3 card-body">
+        <!-- Agregar por URG, agregar por proyecto, por programa, validar el nuevo escenario NO LO COPIO BIEN -->
+        <div class="row mt-3">
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Costo por URG
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
                   <table class="table mb-0">
                     <tbody>
                         <tr v-for="(urg, index) in urgs" :key="index">
                             <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ index }}</p>
                             </td>
-                            <td>
+                            <td class="numbers">
                                 <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx').format(urg) }}</p>
-                            </td>
-                            <td>
-                                <p class="text-xs font-weight-bold mb-0"></p>
                             </td>
                         </tr>
                     </tbody>
@@ -121,21 +121,44 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-6 mb-lg">
-            <div class="card z-index-2">
-              <div class="card">
-                <div class="pb-0 card-header mb-0">
-                  <h6>Costo por Mes</h6>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Costo por programa
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <table class="table mb-0">
+                    <tbody>
+                        <tr v-for="(program, index) in programs" :key="index">
+                            <td>
+                                <p class="text-xs font-weight-bold mb-0">{{ index }}</p>
+                            </td>
+                            <td class="numbers">
+                                <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx').format(program) }}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                  </table>
                 </div>
-                <div class="p-3 card-body">
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Costo por mes
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
                   <table class="table mb-0">
                     <tbody>
                         <tr v-for="(month, index) in months" :key="index">
                             <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ index }}</p>
                             </td>
-                            <td>
+                            <td class="numbers">
                                 <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx').format(month) }}</p>
                             </td>
                         </tr>
@@ -146,34 +169,6 @@
             </div>
           </div>
         </div>
-        <div class="row mt-5">
-          <div class="col-lg-6 mb-lg">
-            <div class="card z-index-2">
-              <div class="card">
-                <div class="pb-0 card-header mb-0">
-                  <h6>Costo por Programa</h6>
-                </div>
-                <div class="p-3 card-body">
-                  <table class="table mb-0">
-                    <tbody>
-                        <tr v-for="(program, index) in programs" :key="index">
-                            <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ index }}</p>
-                            </td>
-                            <td>
-                                <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx').format(program) }}</p>
-                            </td>
-                            <td>
-                                <p class="text-xs font-weight-bold mb-0"></p>
-                            </td>
-                        </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>-->
         </div>
       </div>
     </div>
@@ -294,6 +289,9 @@ export default {
         onMounted(() => {
             getDataCards();
             getChaptersCost();
+            getUrgsCost();
+            getMonthsCost();
+            getProgramsCost();
         })
 
         return {

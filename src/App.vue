@@ -7,6 +7,7 @@
       <div class="container">
         <div class="row no-gutters">
           <div class="col-xxl-12 col-12">
+            <PersonalHeader v-if="isLoggedIn" />
             <router-view :loading="loading" @loading="setLoading"/>
           </div>
         </div>
@@ -23,6 +24,7 @@ import Header from './components/Header.vue';
 import Menu from './components/Menu.vue';
 import Footer from './components/Footer.vue';
 import Loading from './components/Loading.vue';
+import PersonalHeader from './components/PersonalHeader.vue';
 import { useStore } from 'vuex'; 
 
 export default {
@@ -30,7 +32,8 @@ export default {
     Header,
     Menu,
     Footer,
-    Loading
+    Loading,
+    PersonalHeader
   },
   setup() {
     const store = useStore();
