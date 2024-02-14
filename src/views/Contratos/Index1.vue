@@ -71,12 +71,12 @@
                                             </button>
                                         </div>
                                         <div class="col-3">
-                                            <button class="btn btn-primary" @click="edit(item.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
+                                            <button class="btn btn-primary" @click="edit(item.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar" :disabled="item.cerrado">
                                                 <font-awesome-icon icon="fa-solid fa-pen-to-square" />
                                             </button>
                                         </div>
                                         <div class="col-3">
-                                            <button class="btn btn-success" @click="execution(item.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar ejecución">
+                                            <button class="btn btn-success" @click="execution(item.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar ejecución" :disabled="item.cerrado">
                                                 <font-awesome-icon icon="fa-solid fa-circle-play" />
                                             </button>
                                         </div>

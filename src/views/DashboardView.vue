@@ -106,18 +106,14 @@
               </h2>
               <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                  <table class="table mb-0">
-                    <tbody>
-                        <tr v-for="(urg, index) in urgs" :key="index">
-                            <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ index }}</p>
-                            </td>
-                            <td class="numbers">
-                                <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx').format(urg) }}</p>
-                            </td>
-                        </tr>
-                    </tbody>
-                  </table>
+                  <div class="row" v-for="(urg, index) in urgs" :key="index" :class="urg.cerrado ? 'closed' : ''">
+                    <div class="col-8">
+                      <p class="text-xs font-weight-bold mb-0">{{ urg.numero }} - {{ urg.nombre }}</p>
+                    </div>
+                    <div class="col-4 text-end">
+                      <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx').format(urg.total) }}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -316,5 +312,9 @@ export default {
 }
 .agreement-title {
   padding-top: 10px;
+}
+.closed {
+    background-color: green;
+    color: white;
 }
 </style>
