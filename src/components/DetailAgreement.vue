@@ -26,7 +26,7 @@
         </div>
         <div class="col-4 text-start">
             <p><b>Importe</b><br>
-            ${{ new Intl.NumberFormat('es-mx').format(agreement.importe) }}</p>
+            ${{ new Intl.NumberFormat('es-mx', { maximumSignificantDigits: 2 }).format(agreement.importe) }}</p>
         </div>
         <div class="col-4 text-start">
             <p><b>Parcialidad</b><br>

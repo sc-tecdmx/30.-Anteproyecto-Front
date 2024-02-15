@@ -34,7 +34,7 @@
                                 </p>
                             </td>
                             <td class="numbers">
-                                <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx').format(chapter.costo_total) }}</p>
+                                <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx', { maximumSignificantDigits: 2 }).format(chapter.costo_total) }}</p>
                             </td>
                         </tr>
                     </tbody>
@@ -66,7 +66,7 @@
                                 <p class="text-xs font-weight-bold mb-0">{{ agreement.clave }}</p>
                             </td>
                             <td class="numbers">
-                                <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx').format(agreement.importe) }}</p>
+                                <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx', { maximumSignificantDigits: 2 }).format(agreement.importe) }}</p>
                             </td>
                         </tr>
                         <tr>
@@ -74,7 +74,7 @@
                             <p class="text-xs font-weight-bold mb-0">Total</p>
                           </td>
                           <td class="numbers">
-                            <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx').format(detail.total) }}</p>
+                            <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx', { maximumSignificantDigits: 2 }).format(detail.total) }}</p>
                           </td>
                         </tr>
                     </tbody>
@@ -111,7 +111,7 @@
                       <p class="text-xs font-weight-bold mb-0">{{ urg.numero }} - {{ urg.nombre }}</p>
                     </div>
                     <div class="col-4 text-end">
-                      <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx').format(urg.total) }}</p>
+                      <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx', { maximumSignificantDigits: 2 }).format(urg.total) }}</p>
                     </div>
                   </div>
                 </div>
@@ -132,7 +132,7 @@
                                 <p class="text-xs font-weight-bold mb-0">{{ index }}</p>
                             </td>
                             <td class="numbers">
-                                <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx').format(program) }}</p>
+                                <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx', { maximumSignificantDigits: 2 }).format(program) }}</p>
                             </td>
                         </tr>
                     </tbody>
@@ -155,7 +155,7 @@
                                 <p class="text-xs font-weight-bold mb-0">{{ index }}</p>
                             </td>
                             <td class="numbers">
-                                <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx').format(month) }}</p>
+                                <p class="text-xs font-weight-bold mb-0">${{ new Intl.NumberFormat('es-mx', { maximumSignificantDigits: 2 }).format(month) }}</p>
                             </td>
                         </tr>
                     </tbody>
