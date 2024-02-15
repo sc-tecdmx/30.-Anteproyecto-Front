@@ -13,7 +13,7 @@
             ></card>
           </div>
         </div>
-        <div class="row mt-3">
+        <div class="row mt-3" v-if="user.rol == 1 || user.rol == 2 || user.rol == 3">
           <div class="col-lg-6 mb-lg">
             <!-- line chart -->
             <div class="card z-index-2">
@@ -176,6 +176,7 @@ import Card from '@/components/Card.vue';
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import Chart from 'chart.js/auto';
+import { useStore } from 'vuex'; 
 
 export default {
     name: 'DashboardView',
@@ -193,6 +194,8 @@ export default {
         });
         const showDetail = ref(false);
         const loading = ref(false);
+
+        const user = computed(() => store.getters.userLogged);
 
         const getDataCards = async () => {
             try {
@@ -299,6 +302,7 @@ export default {
             detail,
             showDetail,
             loading,
+            user,
             getAgreements,
             closeDetail
         };
