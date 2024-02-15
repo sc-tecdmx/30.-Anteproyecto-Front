@@ -46,6 +46,7 @@ export default {
         .then(() => {
           console.log('Cierre de sesión exitoso');
           router.push('/');
+          window.location.reload();
           console.log('Ruteo exitoso');
         })
         .catch(error => {
