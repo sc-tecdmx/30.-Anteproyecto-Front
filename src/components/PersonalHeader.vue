@@ -20,7 +20,7 @@ import axios from 'axios';
 
 export default {
   name: 'PersonalHeader',
-  setup() {
+  setup(props, context) {
     const store = useStore();
     const year = ref('');
 
@@ -30,11 +30,13 @@ export default {
 
     const getExerciseInfo = async () => {
         try {
-            console.log(exercise)
-            const response = await axios.get(`${process.env.VUE_APP_API_URL}/ejercicios/${exercise.value}`);
-            year.value = response.data.ejercicio;
+          context.emit('loading', true);
+          const response = await axios.get(`${process.env.VUE_APP_API_URL}/ejercicios/${exercise.value}`);
+          year.value = response.data.ejercicio;
         } catch (error) {
-            console.error('Hubo un error al consultar el ejercicio', error);
+          console.error('Hubo un error al consultar el ejercicio', error);
+        } finally {
+          context.emit('loading', false);
         }
     }
 
