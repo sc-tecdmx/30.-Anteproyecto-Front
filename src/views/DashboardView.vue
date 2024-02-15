@@ -173,7 +173,7 @@
     
 <script>
 import Card from '@/components/Card.vue';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
 import Chart from 'chart.js/auto';
 import { useStore } from 'vuex'; 
@@ -194,6 +194,7 @@ export default {
         });
         const showDetail = ref(false);
         const loading = ref(false);
+        const store = useStore();
 
         const user = computed(() => store.getters.userLogged);
 
