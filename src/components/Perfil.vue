@@ -45,12 +45,11 @@ export default {
         store.dispatch('logout')
         .then(() => {
           console.log('Cierre de sesión exitoso');
-          router.push('/');
-          window.location.reload();
-          console.log('Ruteo exitoso');
+          router.push({ path: '/' })
         })
         .catch(error => {
-          console.error('Error de cierre de sesión:', error);
+            router.push({ path: '/' })
+            console.error('Error de cierre de sesión:', error);
         });
     }
 

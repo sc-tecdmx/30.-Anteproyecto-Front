@@ -67,11 +67,12 @@ import { onMounted, ref } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router' ;
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 export default {
   name: 'HomeView',
   components: {},
-  setup() {
+  setup(props, context) {
     const credentials = ref({
       username: '',
       password: '',
@@ -86,24 +87,31 @@ export default {
 
     const getExercises = async () => {
       try {
-          const response = await axios.get(`${process.env.VUE_APP_API_URL}/ejercicios/activos`);
-          exercises.value = response.data;
+        context.emit('loading', true);
+        const response = await axios.get(`${process.env.VUE_APP_API_URL}/ejercicios/activos`);
+        exercises.value = response.data;
       } catch (error) {
           console.log(error);
+      } finally {
+        context.emit('loading', false);
       }
     };
 
     const getScenarios = async () => {
       try {
+          context.emit('loading', true);
           const response = await axios.get(`${process.env.VUE_APP_API_URL}/ejercicios/${credentials.value.exercise}/escenarios`);
           scenarios.value = response.data;
       } catch (error) {
           console.log(error);
+      } finally {
+        context.emit('loading', false);
       }
     }
 
     const login = () => {
       // Llama a la acción 'login' del store Vuex con las credenciales
+      context.emit('loading', true);
       store.dispatch('login', credentials.value)
         .then(() => {
           console.log('Inicio de sesión exitoso');
@@ -111,6 +119,14 @@ export default {
         })
         .catch(error => {
           console.error('Error de inicio de sesión:', error);
+          Swal.fire(
+            '¡Error en el inicio de sesión!',
+            'Por favor, vuelva a comprobar el nombre de usuario y la contraseña e inténtelo de nuevo.',
+            'error'
+          );
+        })
+        .finally(() => {
+          context.emit('loading', false);
         });
     };
 
