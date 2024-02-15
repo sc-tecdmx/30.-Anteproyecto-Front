@@ -16,10 +16,12 @@ export default createStore({
     auth_request(state) {
       state.status = 'loading';
     },
-    auth_success(state, { token, user, warnings }) {
+    auth_success(state, { token, user, exercise, scenario, warnings }) {
       state.status = 'success';
       state.token = token;
       state.user = user;
+      state.exercise = exercise;
+      state.scenario = scenario;
     },
     auth_error(state) {
       state.status = 'error';
@@ -28,6 +30,8 @@ export default createStore({
       state.status = '';
       state.token = '';
       state.user = {};
+      state.exercise = '';
+      state.scenario = '';
     },
     auth_logout_request(state) {
       state.status = 'loading';
@@ -36,6 +40,8 @@ export default createStore({
       state.status = '';
       state.token = '';
       state.user = {};
+      state.exercise = '';
+      state.scenario = '';
     },
     toggleSidebar(state) {
       state.isSidebarOpen = !state.isSidebarOpen;
@@ -50,6 +56,8 @@ export default createStore({
           .then((resp) => {
             const token = resp.data.token;
             const user = resp.data.user;
+            const exercise = credentials.exercise;
+            const scenario = credentials.scenario;
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
             localStorage.setItem('ejercicio', credentials.exercise);
@@ -59,7 +67,7 @@ export default createStore({
             axios.defaults.headers.common['ejercicio'] = credentials.exercise;
             axios.defaults.headers.common['Responsables'] = JSON.stringify(resp.data.responsables);
             axios.defaults.headers.common['escenario'] = credentials.scenario;
-            commit('auth_success', { token, user });
+            commit('auth_success', { token, user, exercise, scenario });
             resolve(resp);
           })
           .catch((err) => {

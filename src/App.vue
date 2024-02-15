@@ -7,7 +7,7 @@
       <div class="container">
         <div class="row no-gutters">
           <div class="col-xxl-12 col-12">
-            <PersonalHeader v-if="isLoggedIn" />
+            <PersonalHeader/>
             <router-view :loading="loading" @loading="setLoading"/>
           </div>
         </div>
