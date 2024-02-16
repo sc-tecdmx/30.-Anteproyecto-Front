@@ -57,7 +57,7 @@
                                                 <p class="text-xs font-weight-bold mb-0 text-center">{{ index + 1}}</p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 text-center">${{ new Intl.NumberFormat('es-mx').format(version.importe) }}</p>
+                                                <p class="text-xs font-weight-bold mb-0 text-center">${{ new Intl.NumberFormat('es-mx').format(Math.trunc(version.importe * 100) / 100) }}</p>
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 text-center">{{ version.seleccionado ? 'Si' : ' No' }}</p>

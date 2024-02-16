@@ -26,10 +26,10 @@
                         />
                         <div class="row mt-3">
                             <div class="col-6">
-                                <p><b>Total Contrato: </b>${{ new Intl.NumberFormat('es-mx').format(agreement.importe) }}</p>
+                                <p><b>Total Contrato: </b>${{ new Intl.NumberFormat('es-mx').format(Math.trunc(agreement.importe * 100) / 100) }}</p>
                             </div>
                             <div class="col-6">
-                                <p><b>Total Ejecutado: </b>${{ new Intl.NumberFormat('es-mx').format(total) }}</p>
+                                <p><b>Total Ejecutado: </b>${{ new Intl.NumberFormat('es-mx').format(Math.trunc(total * 100) / 100) }}</p>
                             </div>
                         </div>
                         <div class="row">
