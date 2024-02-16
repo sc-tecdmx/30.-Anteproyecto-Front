@@ -23,6 +23,16 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col-10">
+                                <p>Reporte de partidas</p>
+                            </div>
+                            <div class="col-2">
+                                <button @click.stop="exportSplit">
+                                    <font-awesome-icon icon="download" />
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-10">
                                 <p>Reporte de ejecución de contratos</p>
                             </div>
                             <div class="col-2">
@@ -198,6 +208,31 @@ export default {
             }
         }
 
+        const exportSplit = async () => {
+            try {
+                context.emit('loading', true);
+                const response = await axios.get(`${process.env.VUE_APP_API_URL}/reportes/contratos/partidas`, {
+                    responseType: 'blob'
+                })
+
+                const url = window.URL.createObjectURL(new Blob([response.data]))
+                const link = document.createElement('a')
+                link.href = url
+                link.setAttribute('download', getFileNameFromHeader(response.headers, 'partidas.xlsx'))
+                document.body.appendChild(link)
+                link.click()
+            } catch (e) {
+                console.log(e);
+                Swal.fire(
+                    'Error!',
+                    'Hubo un error al exportar el archivo, por favor intentalo mas tarde.',
+                    'error'
+                )
+            } finally {
+                context.emit('loading', false);
+            }
+        }
+
         onMounted(() => {
 
         })
@@ -206,7 +241,8 @@ export default {
             exportAgreement,
             exportExecution,
             exportIntegration,
-            exportChapterConcept
+            exportChapterConcept,
+            exportSplit
         }
     }
 }
