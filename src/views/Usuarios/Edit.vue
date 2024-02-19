@@ -165,12 +165,12 @@ export default {
             try {
                 context.emit('loading', true);
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/usuarios/${route.params.id}`);
-                // user.value = response.data
-                user.value = {
+                user.value = response.data
+                /* user.value = {
                     ...response.data,
                     rol_id: response.data.roles[0].id,
                     area_id: response.data.areas[0].id
-                };
+                }; */
             } catch (error) {
                 console.log(error);
             } finally {
