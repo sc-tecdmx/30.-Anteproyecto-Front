@@ -273,6 +273,8 @@ export default {
                         } catch (error) {
                             console.error(error);
                         }
+                    } else {
+                        event.target.checked = !event.target.checked;
                     }
                 });
         }

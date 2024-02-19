@@ -25,7 +25,7 @@
                                     >Clave</label>
                                     <select v-model="agreement.clave" class="form-select" id="clave">
                                         <option :value="null" disabled>Selecciona una opción</option>
-                                        <option v-for="key in keys" :key="key.clave" :value="key.clave">
+                                        <option v-for="key in keys" :key="key.clave" :value="key.id">
                                             {{ key.clave }}
                                         </option>
                                     </select>
@@ -144,6 +144,7 @@ export default {
                 context.emit('loading', true);
                 const response = await axios.get(`${process.env.VUE_APP_API_URL}/contratos/${route.params.id}`);
                 agreement.value = response.data;
+                agreement.value.clave = response.data.epid;
             } catch (error) {
                 console.log(error);
             } finally {
